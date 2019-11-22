@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: configmap-env
+spec:
+  containers:
+  - name: php-apache
+    image: php:7-apache
+    env:
+      - name: NOMBRE
+        value: Manolo
+      - name: APELLIDOS
+        value: Torres
