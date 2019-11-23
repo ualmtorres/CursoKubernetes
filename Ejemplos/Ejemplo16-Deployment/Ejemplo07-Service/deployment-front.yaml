@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: selectividad-front
+  namespace: default
+  labels:
+    app: selectividad-front
+spec:
+  revisionHistoryLimit: 2
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: selectividad-front
+  template:
+    metadata:
+      labels:
+        app: selectividad-front
+    spec:
+      containers:
+      - name: selectividad-front
+        image: ualmtorres/selectividad-front:v2
+        ports:
+        - name: http
+          containerPort: 80
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi

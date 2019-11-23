@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: selectividad-api
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+  selector:
+    app: selectividad-api
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: selectividad-front
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: selectividad-front

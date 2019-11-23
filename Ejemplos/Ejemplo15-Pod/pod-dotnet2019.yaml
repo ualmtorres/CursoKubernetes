@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dotnet2019
+spec:
+  containers:
+  - name: dotnet2019
+    image: ualmtorres/dotnet2019web:v0

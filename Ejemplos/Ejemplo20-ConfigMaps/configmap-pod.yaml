@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: myconfigmap 
+data:
+  nombre: Manolo 
+  apellidos: Torres
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: configmap-pod
+spec:
+  containers:
+  - name: configmap-container
+    image: php:7-apache
+    env:
+      - name: NOMBRE
+        valueFrom: 
+          configMapKeyRef: 
+            name: myconfigmap 
+            key: nombre 
+      - name: APELLIDOS
+        valueFrom:
+          configMapKeyRef:
+            name: myconfigmap
+            key: apellidos
