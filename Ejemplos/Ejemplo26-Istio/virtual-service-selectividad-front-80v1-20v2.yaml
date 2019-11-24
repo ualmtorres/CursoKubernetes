@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: selectividad-api
+spec:
+  hosts:
+  - selectividad-api
+  http:
+  - route:
+    - destination:
+        host: selectividad-api
+        subset: v1
+      weight: 80
+    - destination:
+        host: selectividad-api
+        subset: v2
+      weight: 20
+---

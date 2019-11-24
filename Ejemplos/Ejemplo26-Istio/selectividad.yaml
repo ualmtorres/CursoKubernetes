@@ -1,0 +1,110 @@
+##################################################################################################
+# selectividad-api service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: selectividad-api
+  labels:
+    app: selectividad-api
+    service: selectividad-api
+spec:
+  ports:
+  - port: 80
+    name: http
+  selector:
+    app: selectividad-api
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: selectividad-api-v1
+  labels:
+    app: selectividad-api
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: selectividad-api
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: selectividad-api
+        version: v1
+    spec:
+      containers:
+      - name: selectividad-api
+        image: ualmtorres/selectividad-api:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: selectividad-api-v2
+  labels:
+    app: selectividad-api
+    version: v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: selectividad-api
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: selectividad-api
+        version: v2
+    spec:
+      containers:
+      - name: selectividad-api
+        image: ualmtorres/selectividad-api:v2
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+---
+##################################################################################################
+# selectividad-front services
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: selectividad-front
+  labels:
+    app: selectividad-front
+    service: selectividad-front
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    name: http
+  selector:
+    app: selectividad-front
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: selectividad-front
+  labels:
+    app: selectividad-front
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: selectividad-front
+  template:
+    metadata:
+      labels:
+        app: selectividad-front
+    spec:
+      containers:
+      - name: selectividad-front
+        image: ualmtorres/selectividad-front:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+---
