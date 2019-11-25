@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: jsonreader
+  namespace: default
+  labels:
+    app: jsonreader
+spec:
+  revisionHistoryLimit: 2
+  strategy:
+    type: RollingUpdate
+  replicas: 2
+  selector:
+    matchLabels:
+      app: jsonreader
+  template:
+    metadata:
+      labels:
+        app: jsonreader
+    spec:
+      containers:
+      - name: jsonreader
+        image: ualmtorres/jsonreader:v0
+        ports:
+        - name: http
+          containerPort: 80
