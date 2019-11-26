@@ -5,4 +5,4 @@ metadata:
 spec:
   containers:
   - name: dotnet2019
-    image: ualmtorres/dotnet2019web:v0
+    image: ualmtorres/dotnet2019web:v1
